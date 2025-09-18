@@ -1,0 +1,12 @@
+<div class="tree-box">
+  <ng-container *ngTemplateOutlet="tree; context: { node: 'a', level: 0 }"></ng-container>
+  
+  <ng-template #tree let-node="node" let-level="level">
+    <div class="tree-item" [style.margin-left.px]="level === 0 ? 0 : (level - 1) * 25">
+      {{ level === 0 ? node : '- ' + node }}
+    </div>
+    <ng-container *ngFor="let child of getChildren(node)">
+      <ng-container *ngTemplateOutlet="tree; context: { node: child, level: level + 1 }"></ng-container>
+    </ng-container>
+  </ng-template>
+</div>
